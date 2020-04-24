@@ -21,7 +21,7 @@ const emailConfig = {
   text: ''
 }
 const router = express.Router();
-router.get("/", (req, res) => {
+router.get("/login", (req, res) => {
   res.send(`
   <!DOCTYPE html>
   <html lang="en">
@@ -115,23 +115,6 @@ app.use((req, res, next) => {
 });
 app.use('/.netlify/functions/server', router);  // path must route to lambda
 app.use('/', (req, res) => res.sendFile(path.join(__dirname, '../index.html')));
-cron.schedule("*/15 * * * *", function() {
-  client.query(
-    q.Map(
-      q.Paginate(
-        q.Match(q.Index("all_cron"))
-      ),
-      q.Lambda("X", q.Get(q.Var("X")))
-    )
-  )
-  .then( function(ret) {
-    for (let index = 0; index < ret.data.length; index++) {
-      const element = ret.data[index];
-      console.log(element.data); // {"zip": 60061}
-      // remove colection
-      client.query(q.Delete(q.Ref(element.ref))).then((r) => console.log(r));
-    }
-  })
-});
+
 module.exports = app;
 module.exports.handler = serverless(app);
