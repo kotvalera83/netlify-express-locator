@@ -4,7 +4,7 @@ const path = require('path');
 const serverless = require('serverless-http');
 const app = express();
 const bodyParser = require('body-parser');
-const cron = require("node-cron");
+
 const faunadb = require('faunadb');
 const faunadbKey = 'fnADqC6W_OACCx8gaWh6Rsykbf5uAlq_Y30PCMkv';
 const client = new faunadb.Client({ secret: faunadbKey });
