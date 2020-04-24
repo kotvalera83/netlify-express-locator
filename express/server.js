@@ -22,7 +22,7 @@ const emailConfig = {
 }
 const router = express.Router();
 router.get("/login", (req, res) => {
-  res.send(`
+  res.write(`
   <!DOCTYPE html>
   <html lang="en">
   
